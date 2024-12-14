@@ -12,14 +12,14 @@ function NewList({ addTask }) {
   };
 
   return (
-    <Stack spacing={3} direction="row" align="center" justify="center">
+    <Stack spacing={3} direction="row" align="center" justify="center" borderColor="#cd2c6c" paddingBottom="2rem">
       <Input
         value={task}
         onChange={(e) => setTask(e.target.value)}
         placeholder="Ingresa una tarea"
         _placeholder={{ color: "gray.400" }}
       />
-      <button onClick={handleAddTask}>Añadir</button>
+      <button className="boton" onClick={handleAddTask}>Añadir</button>
     </Stack>
   );
 }

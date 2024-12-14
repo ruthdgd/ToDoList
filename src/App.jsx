@@ -42,8 +42,8 @@ function App() {
   };
 
   return (
-    <Box textAlign="center" p={5} bg="blue.900" color="white" minH="100vh">
-      <Heading mb={6}>Todo List</Heading>
+    <Box textAlign="center" p={5} bg="#ffcebe" color="white" minH="100vh">
+      <Heading width="100%" color="#cd2c6c" mb={6}>Todo List</Heading>
       <NewList addTask={addTask} />
       <ToDoList setFilter={setFilter} />
       <List tasks={filterTasks()} toggleTaskCompletion={toggleTaskCompletion} />
