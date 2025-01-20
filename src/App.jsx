@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import { Box, Heading } from "@chakra-ui/react";
 import NewList from "./newList";
 import ToDoList from "./toDoList";
@@ -13,21 +13,27 @@ function App() {
 
   const [filter, setFilter] = useState("all");
 
-  useEffect(() => {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-  }, [tasks]);
+  const saveTasksToLocalStorage = (updatedTasks) => {
+    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+    setTasks(updatedTasks);
+  };
 
   const addTask = (taskName) => {
     const newTask = { id: Date.now(), name: taskName, completed: false };
-    setTasks((prevTasks) => [...prevTasks, newTask]);
+    const updatedTasks = [...tasks, newTask];
+    saveTasksToLocalStorage(updatedTasks);
   };
 
   const toggleTaskCompletion = (taskId) => {
-    setTasks((prevTasks) =>
-      prevTasks.map((task) =>
-        task.id === taskId ? { ...task, completed: !task.completed } : task
-      )
+    const updatedTasks = tasks.map((task) =>
+      task.id === taskId ? { ...task, completed: !task.completed } : task
     );
+    saveTasksToLocalStorage(updatedTasks);
+  };
+
+  const toggleDeleteTask = (taskId) => {
+    const updatedTasks = tasks.filter((task) => task.id !== taskId);
+    saveTasksToLocalStorage(updatedTasks);
   };
 
   const filterTasks = () => {
@@ -43,10 +49,16 @@ function App() {
 
   return (
     <Box textAlign="center" p={5} bg="#ffcebe" color="white" minH="100vh">
-      <Heading width="100%" color="#cd2c6c" mb={6}>Todo List</Heading>
+      <Heading width="100%" color="#cd2c6c" mb={6}>
+        Todo List
+      </Heading>
       <NewList addTask={addTask} />
       <ToDoList setFilter={setFilter} />
-      <List tasks={filterTasks()} toggleTaskCompletion={toggleTaskCompletion} />
+      <List
+        tasks={filterTasks()}
+        toggleTaskCompletion={toggleTaskCompletion}
+        toggleDeleteTask={toggleDeleteTask}
+      />
       <Buttom />
     </Box>
   );
