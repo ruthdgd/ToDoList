@@ -3,7 +3,6 @@ import { Box, Heading } from "@chakra-ui/react";
 import NewList from "./newList";
 import ToDoList from "./toDoList";
 import List from "./list";
-import Buttom from "./buttom";
 
 function App() {
   const [tasks, setTasks] = useState(() => {
@@ -59,9 +58,9 @@ function App() {
         toggleTaskCompletion={toggleTaskCompletion}
         toggleDeleteTask={toggleDeleteTask}
       />
-      <Buttom />
     </Box>
   );
 }
 
 export default App;
+

@@ -45,4 +45,3 @@ function NewList({ addTask }) {
 }
 
 export default NewList;
-

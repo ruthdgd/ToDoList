@@ -1,49 +1,41 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
-import { Input, Stack, Button } from "@chakra-ui/react";
+import { Select } from "@chakra-ui/react";
 
-function NewList({ addTask }) {
-  const [task, setTask] = useState("");
-
-  const handleAddTask = () => {
-    if (task.trim()) {
-      addTask(task);
-      setTask("");
-    }
+function ToDoList({ setFilter }) {
+  const handleFilterChange = (e) => {
+    setFilter(e.target.value);
   };
 
   return (
-    <Stack
-      spacing={3}
-      direction="row"
-      align="center"
-      justify="center"
-      borderColor="#cd2c6c"
-      paddingBottom="2rem"
+    <Select
+      onChange={handleFilterChange}
+      placeholder="Seleccionar"
+      bg="#cd2c6c"
+      color="white"
+      _placeholder={{ color: "white" }}
+      focusBorderColor="pink.500"
+      _hover={{ bg: "#e63973" }}
     >
-      <Input
-        value={task}
-        color={"#cd2c6c"}
-        fontWeight={"bold"}
-        onChange={(e) => setTask(e.target.value)}
-        placeholder="Ingresa una tarea"
-        _placeholder={{ color: "gray.400" }}
-      />
-      <Button
-        onClick={handleAddTask}
-        bg="#cd2c6c"
-        color="white"
-        padding="8px 16px"
-        borderRadius="5px"
-        _hover={{ bg: "#b0225a" }}
-        _active={{ bg: "#a01d4f" }}
+      <option
+        style={{ backgroundColor: "#cd2c6c", color: "white" }}
+        value="all"
       >
-        Añadir
-      </Button>
-    </Stack>
+        Todas
+      </option>
+      <option
+        style={{ backgroundColor: "#cd2c6c", color: "white" }}
+        value="incomplete"
+      >
+        Incompletas
+      </option>
+      <option
+        style={{ backgroundColor: "#cd2c6c", color: "white" }}
+        value="completed"
+      >
+        Completas
+      </option>
+    </Select>
   );
 }
 
-export default NewList;
-
-
+export default ToDoList;
